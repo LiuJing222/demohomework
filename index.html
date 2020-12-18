@@ -187,13 +187,14 @@
     var time = document.getElementById("time");
     var myDate = new Date();
     var year  = myDate.getFullYear();
-    var month = myDate.getMonth()+1;
+    var month = myDate.getMonth();
+    var months = month+1;
     var date = myDate.getDate();
     var day = myDate.getDay();
     var hour = myDate.getHours();
     var minute = myDate.getMinutes();
     var second = myDate.getSeconds();
-    var d = "今天是"+year+"年"+month+"月"+date+"日";
+    var d = "今天是"+year+"年"+months+"月"+date+"日";
     window.onload = function(){
         time.innerHTML = d;
     }
