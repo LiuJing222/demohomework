@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/index.css">
 </head>
-<body id="box">
+<body>
+    <div  id="first">
     <div id="header">
         <div><img src="./images/name.png" id="name"></div>
         <div id="nav">
@@ -62,6 +63,10 @@
                 2018年，在上海举行“德云社-张云雷相声专场”；同年，作为“国风召集人”参加爱奇艺国风文化创新推广唱演秀节目《国风美少年》。<br/>
                 2019年，推出首支个人单曲《毓贞》 ；3月，张云雷因身体原因提前退出东方卫视喜剧竞演综艺节目《欢乐喜剧人第五季》。<br/>
                 10月，推出个人首张EP《蓝色天空》。
+                <br/>
+                <div id="ch">
+                    此图可戳-->                    
+                </div>
             </div>
             <div id="right">
                 <img src="images/img1.jpg" id="imag">
@@ -77,6 +82,11 @@
         <div class="banner" id="ban">
             <img src="images/img4.jpg" id="img" />
         </div>
+        <div class="btc1">
+            <button id="btnc">
+                点击我
+            </button>
+        </div>
     </div>
     
     <div id="tail">     
@@ -87,8 +97,9 @@
             <img src="images/箭头.jpg" id="jiantou" onclick="goTop()">
 
     </div>
-    <div id="second" >
-        <img src = "images/ending.jpg">
+</div>
+    <div id="seconda" >
+        <img src = "images/ending.jpg" id="imagea">
     </div>
     <canvas id="christmasCanvas"
         style="top: 0px; left: 0px; z-index: 5000; position: fixed; pointer-events: none;">
@@ -102,12 +113,15 @@
     var imag = document.getElementById("imag");
     var note = document.getElementsByClassName("note");
     var btnc = document.getElementById("btnc");
-    var box = document.getElementById("box");
-    var second = document.getElementById("second");
-    // var body = document.getElementsByTagName("body");
+    var first = document.getElementById("first");
+    var seconda = document.getElementById("seconda");
+    var imagea = document.getElementById("imagea");
 
-    box.style.display="block";
-    second.style.display = "none";
+    
+        first.style.display="block";
+        seconda.style.display = "none";
+        
+    
     //滚动条1
     roll[0].style.marginLeft="0";
 
@@ -119,48 +133,34 @@
             roll[0].style.marginLeft="0";
         }
     },10)
-    //鼠标跟随
-    var ox = document.createElement("div");
-    var oy = document.createElement("div");
 
-    ox.style.width = "100%";
-    ox.style.height = "1px";
-    ox.style.backgroundColor ="rgb(91, 245, 91)";
-    ox.style.position = "fixed";
-    ox.style.left = 0;
-    document.body.appendChild(ox);
-
-    oy.style.height = "100%";
-    oy.style.width = "1px";
-    oy.style.backgroundColor = "rgb(91, 245, 91)";
-    oy.style.position = "fixed";
-    oy.style.top = 0;
-    document.body.appendChild(oy);
-
-    document.onmousemove = function(e){
-    var e = e || event;
-    var x = e.pageX;
-    var y = e.pageY;
-    ox.style.top = y + 'px';
-    oy.style.left = x + 'px';
-    };
-  
-    // //鼠标特效
-    // var body = document.getElementById("box");
-    // body.onmousemove = function() {
-    //     body.style.cursor = "url(images/img4.jpg),auto";
-    // }
     //滚动条2
     note[0].style.marginLeft="0";
     var j = 0;
     var intervalId=setInterval(function(){
     var marginLeft = parseInt(note[0].style.marginLeft);
     note[0].style.marginLeft = (marginLeft + 1)+"px";
-    if(marginLeft == 1000){
-        note[0].style.marginLeft="0";
+        if(marginLeft == 1000){
+            note[0].style.marginLeft="0";
+        }
+    },10)
+
+    //颜色变换
+    var timecha = setInterval(function(){
+        var arr = [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f'];
+        var colorStr = "#";
+        for(var i =0; i <6;i++){
+            var index = parseInt(Math.random()*arr.length);
+            colorStr = colorStr +arr[index];
+        }
+        ch.style.color = colorStr;
+    },500);
+
+    //点击切换
+    right.onclick = function(){
+        imag.setAttribute("src","images/img2.jpg");
     }
-},10)
-   
+
     //图片放映
     var index=0;
     var imgurl=["images/img3.jpg","images/img4.jpg","images/img5.jpg","images/img5.jpg","images/img6.jpg","images/img7.jpg","images/img8.jpg","images/img9.jpg","images/img10.jpg","images/img11.jpg","images/img12.jpg","images/img13.jpg"];
@@ -174,11 +174,17 @@
     }
     setInterval("change()",600);
 
-   
-
+    //页面切换
+    btnc.onclick = function(){
+        first.style.display="none";
+        seconda.style.display = "block";
+    }
+    seconda.onclick = function(){
+        first.style.display="block";
+        seconda.style.display = "none";
+    }
     //日期
     var time = document.getElementById("time");
-    
     var myDate = new Date();
     var year  = myDate.getFullYear();
     var month = myDate.getMonth();
@@ -192,14 +198,13 @@
         time.innerHTML = d;
     }
    
-
     //回到顶端
     top.onclick = goTop();
     function goTop(){
        var odiv = document.getElementById("top");
        document.documentElement.scrollTop = document.body.srcollTop=0;
    }
-   
+   //雪花
    	var snow = function () {
         var b = document.getElementById("christmasCanvas"), a = b.getContext("2d"), d = window.innerWidth,
             c = window.innerHeight;
